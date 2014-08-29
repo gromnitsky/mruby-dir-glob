@@ -6,7 +6,7 @@
 #include "fnmatch.h"
 
 static mrb_value
-mrb_dir_mkdir(mrb_state *mrb, mrb_value klass)
+mrb_fnmatch(mrb_state *mrb, mrb_value klass)
 {
 	mrb_value m_pattern, m_string;
 	mrb_int m_flags = 0;
@@ -19,19 +19,28 @@ mrb_dir_mkdir(mrb_state *mrb, mrb_value klass)
 
 	result = fnmatch(pattern, string, m_flags);
 
-	return mrb_fixnum_value(result);
+	return mrb_bool_value(result == 0);
 }
 
 void
-mrb_mruby_dir_glob_example_gem_init(mrb_state *mrb) {
-	FileClass = mrb_define_class(mrb, "File", mrb->object_class);
-	MRB_SET_INSTANCE_TT(FileClass, MRB_TT_DATA);
+mrb_mruby_dir_glob_gem_init(mrb_state *mrb) {
+	struct RClass *io = mrb_define_class(mrb, "IO", mrb->object_class);
+	struct RClass *file = mrb_define_class(mrb, "File", io);
 
-	mrb_define_class_method(mrb, FileClass, "fnmatch",
+	MRB_SET_INSTANCE_TT(file, MRB_TT_DATA);
+
+	mrb_define_class_method(mrb, file, "fnmatch",
 							mrb_fnmatch, MRB_ARGS_REQ(2)|MRB_ARGS_OPT(1));
+	mrb_define_class_method(mrb, file, "fnmatch?",
+							mrb_fnmatch, MRB_ARGS_REQ(2)|MRB_ARGS_OPT(1));
+
+	mrb_define_const(mrb, file, "FNM_NOESCAPE", mrb_fixnum_value(FNM_NOESCAPE));
+	mrb_define_const(mrb, file, "FNM_PATHNAME", mrb_fixnum_value(FNM_PATHNAME));
+	mrb_define_const(mrb, file, "FNM_DOTMATCH", mrb_fixnum_value(FNM_DOTMATCH));
+	mrb_define_const(mrb, file, "FNM_CASEFOLD", mrb_fixnum_value(FNM_CASEFOLD));
 }
 
 void
-mrb_mruby_dir_glob_example_gem_final(mrb_state *mrb) {
+mrb_mruby_dir_glob_gem_final(mrb_state *mrb) {
 	/* empty */
 }
