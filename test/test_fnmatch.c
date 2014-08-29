@@ -7,7 +7,7 @@ void
 t(const char *pattern, const char *string, int flags, int expected_result)
 {
 	int r = fnmatch(pattern, string, flags);
-	printf("%-27s %-40s %s %s\n",
+	printf("%-27s %-36s %s %s\n",
 		   pattern,
 		   string,
 		   r == expected_result ? "OK" : "FAILED",
@@ -26,6 +26,9 @@ int main(int argc, char **argv)
 	t("c*", "cats!", 0, 0);
 
 	t("c*t", "c/a/b/t", 0, 0);
+
+	t("cat", "CAT", 0,            FNM_NOMATCH);
+	t("cat", "CAT", FNM_CASEFOLD, 0);
 
 	return 0;
 }

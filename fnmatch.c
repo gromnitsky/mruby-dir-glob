@@ -1,11 +1,10 @@
 #include <string.h>
 #include <ctype.h>
+#include <stdio.h>
 
 #include "fnmatch.h"
 
-#define ISUPPER(c) isupper((unsigned char)(c))
-
-#define downcase(c) (nocase && ISUPPER(c) ? tolower(c) : (c))
+#define downcase(c) (nocase && isupper(c) ? tolower(c) : (c))
 #define compare(c1, c2) (((unsigned char)(c1)) - ((unsigned char)(c2)))
 #define Next(p) ((p) + 1)
 #define Inc(p) (++(p))
@@ -30,14 +29,14 @@ bracket(const char* p, const char* s, int flags) {
 
 		p = Next(t1);
 		if(p[0] == '-' && p[1] != ']') {
-		const char *t2 = p + 1;
-		if(escape && *t2 == '\\') t2++;
-		if(!*t2) return NULL;
+			const char *t2 = p + 1;
+			if(escape && *t2 == '\\') t2++;
+			if(!*t2) return NULL;
 
-		p = Next(t2);
-		if(!ok && Compare(t1, s) <= 0 && Compare(s, t2) <= 0) ok = 1;
+			p = Next(t2);
+			if(!ok && Compare(t1, s) <= 0 && Compare(s, t2) <= 0) ok = 1;
 		} else {
-		if(!ok && Compare(t1, s) == 0) ok = 1;
+			if(!ok && Compare(t1, s) == 0) ok = 1;
 		}
 	}
 

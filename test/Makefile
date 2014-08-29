@@ -1,8 +1,12 @@
 CFLAGS += -Wall
 
+obj := $(patsubst %.c, %.o, $(wildcard *.c))
 tests := $(patsubst %.c, %, $(wildcard test_*.c))
 
-all: $(tests)
+test_fnmatch:
+	cc $(CFLAGS) ../fnmatch.o $@.o -o $@
+
+all: $(obj) $(tests)
 	@for idx in $(tests); do \
 		printf "\n%s:\n" $$idx; \
 		./$$idx; \
@@ -10,4 +14,4 @@ all: $(tests)
 
 .PHONY: clean
 clean:
-	rm -f $(tests)
+	rm -f $(tests) $(obj)
