@@ -1,8 +1,10 @@
+CFLAGS += -Wall
+
 obj := $(patsubst %.c, %.o, $(wildcard *.c))
 
-fnmatch.c: fnmatch.h
-
 all: $(obj)
+
+fnmatch.c: fnmatch.h
 
 .PHONY: clean
 clean:
