@@ -30,6 +30,9 @@ int main(int argc, char **argv)
 
 	t("c*t", "c/a/b/t", 0, OK);
 
+	t("ca[a-z]", "cat", 0, OK);
+	t("ca[^t]", "cat", 0, FNM_NOMATCH);
+
 	t("cat", "CAT", 0,            FNM_NOMATCH);
 	t("cat", "CAT", FNM_CASEFOLD, OK);
 
