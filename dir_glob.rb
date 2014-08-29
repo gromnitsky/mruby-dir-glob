@@ -217,21 +217,16 @@ class Dir
     end
 
     def self.path_split(str)
-      if str.match(/\[.*\/.*\]/)
-        raise ArgumentError, "'/' isn't allowed in [set]", caller
-      end
-
-      start = 0
       ret = []
-
       last_match = nil
 
-      while match = str.match(%r!/+!, start)
+      str2 = str.dup
+      while match = str2.match(%r!/+!)
         cur_start, cur_end = match.begin(0), match.end(0)
-        ret << str.slice(start, cur_start - start)
-        ret << str.slice(cur_start, cur_end - cur_start)
+        ret << str2.slice(0, cur_end - 1)
+        ret << str2.slice(cur_start, cur_end - cur_start)
 
-        start = cur_end
+        str2 = str2[cur_end..-1]
 
         last_match = match
       end
@@ -277,7 +272,7 @@ class Dir
             last = RecursiveDirectories.new last, flags
           end
         elsif /^[^\*\?\]]+$/.match(dir)
-          while /^[^\*\?\]]+$/.match(parts[-2])
+          while parts[-2] && /^[^\*\?\]]+$/.match(parts[-2])
             next_sep = parts.pop
             next_sect = parts.pop
 

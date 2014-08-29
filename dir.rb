@@ -1,4 +1,4 @@
-require [File.dirname(__FILE__), './dir_glob'].join '/'
+require File.join File.dirname(__FILE__), 'dir_glob.rb'
 
 class Dir
 
