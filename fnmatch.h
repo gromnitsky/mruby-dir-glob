@@ -14,9 +14,4 @@
 
 int fnmatch(const char* pattern, const char* string, int flags);
 
-/*
- * Local Variables:
- * tab-width: 4
- * End:
- */
 #endif // FNMATCH_H_81FC5C17_8B73_2C6E_4A94_3F68CCA3B7E1

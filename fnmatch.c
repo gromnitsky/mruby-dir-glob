@@ -162,9 +162,3 @@ fnmatch(const char* p, const char* s, int flags) {
         return fnmatch_helper(&p, &s, flags);
 	}
 }
-
-/*
- * Local Variables:
- * tab-width: 4
- * End:
- */
