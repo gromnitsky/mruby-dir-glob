@@ -22,6 +22,8 @@
 #define FNM_NOMATCH		1
 #define FNM_ERROR		2
 
+int fnmatch(const char* pattern, const char* string, int flags);
+
 /*
  * Local Variables:
  * tab-width: 4
