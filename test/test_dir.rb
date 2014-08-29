@@ -49,6 +49,8 @@ class TestDir < Test::Unit::TestCase
 
     assert_equal((?a..?f).map {|f| File.join(@root, f) }.sort,
                  Dir.glob(File.join(@root, '[abcdef]')).sort)
+
+    assert_raises(ArgumentError) { Dir.glob('foo[ba/r]baz') }
   end
 
   def test_glob_recursive

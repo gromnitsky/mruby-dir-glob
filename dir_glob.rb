@@ -217,6 +217,10 @@ class Dir
     end
 
     def self.path_split(str)
+      if str.match(/\[.*\/.*\]/)
+        raise ArgumentError, "'/' isn't allowed in [set]", caller
+      end
+
       start = 0
       ret = []
 
