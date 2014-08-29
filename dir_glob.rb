@@ -299,25 +299,6 @@ class Dir
       env.matches
     end
 
-    total = 0
-
-    case total
-    when Fixnum
-      if total == 0
-        @glob_cache = nil
-      else
-        @glob_cache = []
-      end
-    when false
-      @glob_cache = nil
-    else
-      @glob_cache = []
-    end
-
-    def self.glob_cache
-      @glob_cache
-    end
-
     def self.glob(pattern, flags, matches=[])
       # Rubygems typicall uses Dir[] as basicly a glorified File.exists?
       # to check for multiple extensions. So we went ahead and sped up
@@ -351,17 +332,6 @@ class Dir
       end
 
       ec_key = nil
-
-      if gc = @glob_cache
-        ec_key = [pattern, flags]
-        if patterns = gc[ec_key]
-          patterns.each do |node|
-            run node, matches
-          end
-
-          return matches
-        end
-      end
 
       if pattern.include? "{"
         patterns = compile(pattern, flags)
