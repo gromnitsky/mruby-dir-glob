@@ -238,13 +238,7 @@ class Dir
         ret << str
       end
 
-      # Trim
-      if !ret.empty?
-        while s = ret.first and s.empty?
-          ret.shift
-        end
-      end
-
+      # Trim from end
       if !ret.empty?
         while s = ret.last and s.empty?
           ret.pop
