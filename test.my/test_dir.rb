@@ -13,8 +13,8 @@ else
   testunit_class = Test::Unit::TestCase
 end
 
-require '../dir'
-require '../dir_glob'
+require '../mrblib/dir'
+require '../mrblib/dir_glob'
 
 class TestDir < testunit_class
 

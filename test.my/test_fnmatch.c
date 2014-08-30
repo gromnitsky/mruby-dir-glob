@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../fnmatch.h"
+#include "fnmatch.h"
 
 #define OK 0
 
