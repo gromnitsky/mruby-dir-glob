@@ -14,6 +14,7 @@ else
 end
 
 require '../dir'
+require '../dir_glob'
 
 class TestDir < testunit_class
 

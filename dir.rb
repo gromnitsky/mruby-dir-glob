@@ -1,5 +1,3 @@
-require File.join File.dirname(__FILE__), 'dir_glob.rb'
-
 class Dir
 
   def self.glob(pattern, flags=0, &block)

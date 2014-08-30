@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require '../dir'
+require '../dir_glob'
 
 # ["", "/", "tmp", "/", "__test_dir__20140829-5628-avzoep", "/", "[abcdef]"]
 p Dir::Glob.path_split '/tmp/__test_dir__20140829-5628-avzoep/[abcdef]'
